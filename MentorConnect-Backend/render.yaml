@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: mentorconnect-backend
+    runtime: java
+    buildCommand: mvn clean package -DskipTests
+    startCommand: java -jar target/mentorconnect-backend-1.0.0.jar
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_USERNAME
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: MAIL_HOST
+        value: smtp.gmail.com
+      - key: MAIL_PORT
+        value: 587
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: MAIL_SMTP_AUTH
+        value: true
+      - key: MAIL_SMTP_STARTTLS_ENABLE
+        value: true
+      - key: MAIL_SMTP_STARTTLS_REQUIRED
+        value: true
+      - key: MAIL_SMTP_TIMEOUT
+        value: 5000
+      - key: SERVER_PORT
+        value: 8080
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRATION
+        value: 86400000
+      - key: CORS_ORIGINS
+        sync: false
+      - key: LOG_LEVEL_APP
+        value: INFO
+      - key: LOG_LEVEL_SECURITY
+        value: INFO
+    healthCheckPath: /api/health
+    autoDeploy: true
